@@ -1,0 +1,13 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!terraform.tfvars.example
+crash.log
+.DS_Store
+
+# Generated locally. Do not commit keys or the live Grafana password.
+*.pem
+*.key
+k8s/grafana-admin.yaml
+kubeconfig
