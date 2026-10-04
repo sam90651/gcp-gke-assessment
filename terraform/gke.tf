@@ -9,8 +9,7 @@ resource "google_container_cluster" "primary" {
   network    = google_compute_network.lab.name
   subnetwork = google_compute_subnetwork.gke.name
 
-  # Pods use the subnet secondary range. ClusterIP CIDR stays Google-managed
-  # (34.118.224.0/20 on GKE 1.29+). gke-primary-services is reserved and unused.
+  # Pods use the subnet secondary range. 
   ip_allocation_policy {
     cluster_secondary_range_name = "gke-primary-pods"
   }
