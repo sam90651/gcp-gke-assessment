@@ -2,7 +2,7 @@
 
 Working URL: **https://www.web-lab-app.org** (also https://web-lab-app.org)
 
-I built two zonal GKE clusters behind one global load balancer, with logs in BigQuery and Grafana on cluster 1. The page is a small Python app. The image is in Artifact Registry. A ConfigMap sets the message and version; a Secret holds an API key.
+I built two zonal GKE clusters behind one global load balancer, with logs in BigQuery and Grafana on cluster 1. The page is a small Python app. The image is in Artifact Registry. A ConfigMap sets the message and version a Secret holds an API key.
 
 If the response says `Hello world from cluster 1` you landed on `gke-primary`. `Hello world from cluster 2` is `gke-secondary`.
 
