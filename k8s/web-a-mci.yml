@@ -1,6 +1,3 @@
-# Apply on the config cluster only (gke-primary). Do not apply on gke-secondary.
-# Uses the Google-managed SSL cert already in Compute Engine (from the earlier
-# GKE ManagedCertificate). MCI cannot attach a Kubernetes ManagedCertificate.
 apiVersion: networking.gke.io/v1
 kind: MultiClusterIngress
 metadata:
