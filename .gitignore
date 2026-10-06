@@ -2,7 +2,7 @@
 *.tfstate
 *.tfstate.*
 *.tfvars
-!terraform.tfvars.example
+!terraform.tfvars
 crash.log
 .DS_Store
 
