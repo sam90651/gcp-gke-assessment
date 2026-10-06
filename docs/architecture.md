@@ -35,7 +35,7 @@ The load balancer terminates HTTPS with a Google-managed certificate for `web-la
 
 ## Identity
 
-Workload Identity is on for both clusters (workloadPool = PROJECT_ID.svc.id.goog). Fleet registration required that. Without it, gke-secondary could not join and Multi Cluster Ingress would not run.
+Workload Identity is on for both clusters.Fleet registration required that. Without it, gke-secondary could not join and Multi Cluster Ingress would not run.
 
 Nodes still authenticate as the Compute Engine default service account. That account has artifactregistry.reader so kubelet can pull web-a:1.0.0, and bigquery.dataViewer / bigquery.jobUser so Grafana can query logs. 
 
