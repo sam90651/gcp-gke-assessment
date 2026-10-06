@@ -11,7 +11,7 @@ resource "google_logging_project_sink" "app" {
 
   filter = <<-EOT
     resource.type="k8s_container"
-    AND resource.labels.cluster_name="gke-primary"
+    AND resource.labels.cluster_name=("gke-primary" OR "gke-secondary")
     AND resource.labels.namespace_name="web"
   EOT
 
@@ -30,7 +30,7 @@ resource "google_logging_project_sink" "cluster" {
 
   filter = <<-EOT
     resource.type=("k8s_node" OR "k8s_pod" OR "k8s_cluster" OR "k8s_control_plane_component")
-    AND resource.labels.cluster_name="gke-primary"
+    AND resource.labels.cluster_name=("gke-primary" OR "gke-secondary")
   EOT
 
   unique_writer_identity = true
@@ -54,7 +54,7 @@ resource "google_bigquery_dataset_iam_member" "cluster_sink_writer" {
   member     = google_logging_project_sink.cluster.writer_identity
 }
 
-# Workload Identity is off, so Grafana uses the node identity.
+
 resource "google_project_iam_member" "node_bigquery_viewer" {
   project = var.project_id
   role    = "roles/bigquery.dataViewer"

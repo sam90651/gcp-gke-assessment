@@ -1,5 +1,5 @@
 resource "google_compute_network" "lab" {
-  name                    = "lab-vpc"
+  name                    = "gke-vpc"
   auto_create_subnetworks = false
   routing_mode            = "REGIONAL"
 
@@ -24,6 +24,19 @@ resource "google_compute_subnetwork" "gke" {
   }
 }
 
+resource "google_compute_subnetwork" "gke_east" {
+  name                     = "gke-secondary-subnet"
+  region                   = var.region_east
+  network                  = google_compute_network.lab.id
+  ip_cidr_range            = "10.11.0.0/22"
+  private_ip_google_access = true
+
+  secondary_ip_range {
+    range_name    = "gke-secondary-pods"
+    ip_cidr_range = "10.21.0.0/16"
+  }
+}
+
 resource "google_compute_firewall" "allow_custom" {
   name    = "lab-vpc-allow-custom"
   network = google_compute_network.lab.name
@@ -32,6 +45,8 @@ resource "google_compute_firewall" "allow_custom" {
     "10.10.0.0/22",
     "10.20.0.0/16",
     "10.30.0.0/20",
+    "10.11.0.0/22",
+    "10.21.0.0/16",
   ]
 
   allow {

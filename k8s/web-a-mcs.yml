@@ -1,0 +1,18 @@
+apiVersion: networking.gke.io/v1
+kind: MultiClusterService
+metadata:
+  name: web-a-mcs
+  namespace: web
+spec:
+  template:
+    spec:
+      selector:
+        app: web-a
+      ports:
+        - name: http
+          protocol: TCP
+          port: 80
+          targetPort: 8080
+  clusters:
+    - link: "us-central1-a/gke-primary"
+    - link: "us-east1-b/gke-secondary"

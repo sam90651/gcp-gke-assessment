@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-a
+  namespace: web
+  labels:
+    app: web-a
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-a
+  template:
+    metadata:
+      labels:
+        app: web-a
+    spec:
+      containers:
+        - name: web-a
+          image: us-central1-docker.pkg.dev/project-f0424c60-4a52-470d-b10/web-a/web-a:1.0.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+            - name: APP_MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: web-a-config
+                  key: message
+            - name: APP_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  name: web-a-config
+                  key: version
+            - name: APP_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: web-a-secret
+                  key: api-key
+          resources:
+            requests:
+              cpu: 20m
+              memory: 64Mi

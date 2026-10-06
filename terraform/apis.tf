@@ -5,6 +5,9 @@ resource "google_project_service" "required" {
     "logging.googleapis.com",
     "bigquery.googleapis.com",
     "cloudresourcemanager.googleapis.com",
+    "dns.googleapis.com",
+    "artifactregistry.googleapis.com",
+    "cloudbuild.googleapis.com",
   ])
 
   project            = var.project_id

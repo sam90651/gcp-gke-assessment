@@ -1,0 +1,32 @@
+# Apply on the config cluster only (gke-primary). Do not apply on gke-secondary.
+# Uses the Google-managed SSL cert already in Compute Engine (from the earlier
+# GKE ManagedCertificate). MCI cannot attach a Kubernetes ManagedCertificate.
+apiVersion: networking.gke.io/v1
+kind: MultiClusterIngress
+metadata:
+  name: web-a-mci
+  namespace: web
+  annotations:
+    networking.gke.io/static-ip: "136.81.187.221"
+    networking.gke.io/pre-shared-certs: "mcrt-4c1b189c-9c33-4157-ab18-544edd41b823"
+spec:
+  template:
+    spec:
+      backend:
+        serviceName: web-a-mcs
+        servicePort: 80
+      rules:
+        - host: web-lab-app.org
+          http:
+            paths:
+              - path: /*
+                backend:
+                  serviceName: web-a-mcs
+                  servicePort: 80
+        - host: www.web-lab-app.org
+          http:
+            paths:
+              - path: /*
+                backend:
+                  serviceName: web-a-mcs
+                  servicePort: 80

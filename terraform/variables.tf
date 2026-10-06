@@ -1,5 +1,5 @@
 variable "project_id" {
-  description = "Existing lab project. Display name is My First Project."
+  description = "Existing lab project."
   type        = string
   default     = "project-f0424c60-4a52-470d-b10"
 }
@@ -14,26 +14,13 @@ variable "zone" {
   default = "us-central1-a"
 }
 
-variable "dev_group" {
-  description = "Google Group email for developers. Empty skips the binding."
-  type        = string
-  default     = ""
+variable "region_east" {
+  type    = string
+  default = "us-east1"
 }
 
-variable "ops_group" {
-  description = "Google Group email for ops. Empty skips the binding."
-  type        = string
-  default     = ""
+variable "zone_east" {
+  type    = string
+  default = "us-east1-b"
 }
 
-variable "sre_group" {
-  description = "Google Group email for SRE. Empty skips the binding."
-  type        = string
-  default     = ""
-}
-
-variable "create_cicd_sa" {
-  description = "Create the cicd-deployer service account and its project roles."
-  type        = bool
-  default     = false
-}

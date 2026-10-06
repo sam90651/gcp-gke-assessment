@@ -1,0 +1,9 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: web-a-cert
+  namespace: web
+spec:
+  domains:
+    - web-lab-app.org
+    - www.web-lab-app.org
